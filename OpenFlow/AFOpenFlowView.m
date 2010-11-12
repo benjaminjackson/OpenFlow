@@ -307,9 +307,18 @@ const static CGFloat kReflectionFraction = 0.85;
 	[self centerOnSelectedCover:YES];
 	
 	// And send the delegate the newly selected cover message.
-	if (beginningCover != selectedCoverView.number)
-		if ([self.viewDelegate respondsToSelector:@selector(openFlowView:selectionDidChange:)])
+	if (beginningCover != selectedCoverView.number) {
+		if ([self.viewDelegate respondsToSelector:@selector(openFlowView:selectionDidChange:)]) {
 			[self.viewDelegate openFlowView:self selectionDidChange:selectedCoverView.number];
+		}
+	}
+	else {
+    	if (isSingleTap) {
+		    if ([self.viewDelegate respondsToSelector:@selector(openFlowView:selectionWasTapped:)]) {
+			    [self.viewDelegate openFlowView:self selectionWasTapped:selectedCoverView.number];
+		    }
+	    }
+	}
 }
 
 - (void)centerOnSelectedCover:(BOOL)animated {
