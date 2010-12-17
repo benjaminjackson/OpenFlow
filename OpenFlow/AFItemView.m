@@ -77,7 +77,9 @@
 
 - (void)setFrame:(CGRect)newFrame {
 	[super setFrame:newFrame];
-	[imageView setFrame:newFrame];
+	if(!isnan(newFrame.size.width) && !isnan(newFrame.size.height)) {
+    	[imageView setFrame:newFrame];
+	}
 }
 
 - (void)dealloc {
